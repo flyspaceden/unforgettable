@@ -505,7 +505,7 @@ const QuoteIcon = ({ className }) => (
 
 // --- 主页面组件 ---
 
-const HomePage = ({ t, lang }) => {
+const HomePage = ({ t, lang, setPage }) => {
   if (!t || !t.hero || !t.usp) return null; // Defensive check
   const [activeMedia, setActiveMedia] = useState(null);
   const galleryMeta = lang === 'zh' 
@@ -549,10 +549,16 @@ const HomePage = ({ t, lang }) => {
           </p>
           
           <div className="flex flex-wrap gap-4">
-            <button className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-teal-600 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2">
+            <button 
+              className="px-8 py-4 bg-slate-900 text-white rounded-xl font-bold hover:bg-teal-600 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2"
+              onClick={() => setPage?.('products')}
+            >
               {t.hero.btn1} <ArrowRight size={18} />
             </button>
-            <button className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2">
+            <button 
+              className="px-8 py-4 bg-white text-slate-700 border border-slate-200 rounded-xl font-bold hover:bg-slate-50 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center gap-2"
+              onClick={() => setPage?.('brand')}
+            >
               {t.hero.btn2} <Users size={18} />
             </button>
           </div>
@@ -1142,35 +1148,50 @@ const NutritionPage = ({ t, lang }) => {
           <div className="grid md:grid-cols-2 gap-8 pt-8 border-t border-slate-100">
              <div>
                 <div className="text-sm font-bold text-slate-700 mb-4 text-center">{t.nutrition.protein}</div>
-                <div className="flex justify-center items-end gap-4 h-40">
-                   <div className="w-16 bg-slate-200 rounded-t-xl relative group h-[80%]">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-500">{t.nutrition.carp}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-slate-400">15.9%</div>
+                <div className="flex justify-center items-end gap-4 h-48 pt-4">
+                  <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition">{lang === 'zh' ? '15.9%' : '15.9%'}</div>
+                      <div className="w-16 bg-slate-200 rounded-t-xl relative overflow-hidden transition-transform duration-300 group-hover:scale-105" style={{ height: '65%' }}>
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-600">{t.nutrition.carp}</div>
+                      </div>
                    </div>
-                   <div className="w-16 bg-teal-500 rounded-t-xl relative group h-full shadow-lg">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-white">{t.nutrition.sultan}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-teal-600">19.1%</div>
+                   <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-teal-800 bg-teal-50 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition flex items-center gap-1">
+                        <Sparkles size={12} className="text-teal-500" />19.1%
+                      </div>
+                      <div className="w-[4.5rem] bg-gradient-to-t from-teal-600 via-teal-500 to-teal-300 rounded-t-[1rem] relative overflow-hidden shadow-[0_12px_40px_rgba(13,148,136,0.35)] border border-teal-200 transition-transform duration-300 group-hover:scale-115" style={{ height: '100%' }}>
+                        <div className="absolute inset-x-0 top-0 h-10 bg-white/10 blur-lg"></div>
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-white drop-shadow">{t.nutrition.sultan}</div>
+                      </div>
                    </div>
-                   <div className="w-16 bg-slate-300 rounded-t-xl relative group h-[90%]">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-500">{t.nutrition.perch}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-slate-400">17.6%</div>
+                   <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition">17.6%</div>
+                      <div className="w-16 bg-slate-300 rounded-t-xl relative overflow-hidden transition-transform duration-300 group-hover:scale-105" style={{ height: '75%' }}>
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-600">{t.nutrition.perch}</div>
+                      </div>
                    </div>
                 </div>
              </div>
              <div>
                 <div className="text-sm font-bold text-slate-700 mb-4 text-center">{t.nutrition.fat}</div>
-                <div className="flex justify-center items-end gap-4 h-40">
-                   <div className="w-16 bg-slate-200 rounded-t-xl relative group h-[20%]">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-500">{t.nutrition.carp}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-slate-400">0.6%</div>
+                <div className="flex justify-center items-end gap-4 h-48 pt-4">
+                   <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition">0.6%</div>
+                      <div className="w-16 bg-slate-200 rounded-t-xl relative h-[20%] overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-600">{t.nutrition.carp}</div>
+                      </div>
                    </div>
-                   <div className="w-16 bg-orange-400 rounded-t-xl relative group h-[80%] shadow-lg">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-white">{t.nutrition.sultan}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-orange-500">2.4%</div>
+                   <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-orange-700 bg-white/80 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition">2.4%</div>
+                      <div className="w-16 bg-orange-400 rounded-t-xl relative h-[80%] overflow-hidden shadow-lg transition-transform duration-300 group-hover:scale-110">
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-white">{t.nutrition.sultan}</div>
+                      </div>
                    </div>
-                   <div className="w-16 bg-slate-300 rounded-t-xl relative group h-[50%]">
-                      <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-500">{t.nutrition.perch}</div>
-                      <div className="absolute -top-6 w-full text-center text-xs font-bold text-slate-400">1.5%</div>
+                   <div className="flex flex-col justify-end items-center h-full gap-2 group">
+                      <div className="text-xs font-bold text-slate-600 bg-white/80 px-1.5 py-0.5 rounded shadow-sm group-hover:shadow-md transition">1.5%</div>
+                      <div className="w-16 bg-slate-300 rounded-t-xl relative h-[50%] overflow-hidden transition-transform duration-300 group-hover:scale-105">
+                        <div className="absolute bottom-2 w-full text-center text-xs font-bold text-slate-600">{t.nutrition.perch}</div>
+                      </div>
                    </div>
                 </div>
              </div>
@@ -1303,7 +1324,7 @@ const ContactPage = ({ t }) => {
             </div>
             <div className="flex items-center gap-4">
               <Mail className="text-teal-500 flex-shrink-0" />
-              <p>zengweifeng13@163.com</p>
+              <p>zengweifeng3@163.com</p>
             </div>
           </div>
 
@@ -1510,7 +1531,7 @@ const App = () => {
               <ul className="space-y-2 text-sm">
                 <li>{lang === 'zh' ? '电话：13923710623' : 'Tel: +86 13923710623'}</li>
                 <li>{lang === 'zh' ? '广东省佛山市南海区' : 'Nanhai District, Foshan, Guangdong'}</li>
-                <li>zengweifeng13@163.com</li>
+                <li>zengweifeng3@163.com</li>
               </ul>
             </div>
           </div>
