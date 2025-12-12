@@ -12,6 +12,8 @@ import logoImage from './assets/images/James Wong.png';
 import emperorFishImage from './assets/images/帝皇鱼.png';
 import princeFishImage from './assets/images/小鱼.jpg';
 import processedFishImage from './assets/images/鱼丸.jpg';
+import museumLocal from './assets/images/水产博物馆 & 科普研学基地.jpg';
+import baseLocal from './assets/images/源自马来西亚忘不了-苏丹鱼.jpg';
 import handbookImage from './assets/images/苏丹鱼手册.jpg';
 import introImage from './assets/images/公司简介.jpg';
 import storyImage from './assets/images/苏丹鱼介绍.jpg';
@@ -24,7 +26,7 @@ const IMAGES = {
   hero: heroImage,
   fish_dish: emperorFishImage,
   fried_fish: princeFishImage,
-  base: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1600",
+  base: baseLocal,
   tech_water: "https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&q=80&w=800",
   james: logoImage,
   tourism: "https://images.unsplash.com/photo-1571769267292-e24dfadebbdc?auto=format&fit=crop&q=80&w=1200",
@@ -34,8 +36,8 @@ const IMAGES = {
   tech_data: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
   tech_feed: "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&q=80&w=800",
   collagen: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&q=80&w=800",
-  museum: "https://images.unsplash.com/photo-1518998053901-5348d3969105?auto=format&fit=crop&q=80&w=800", 
-  eternal: "https://images.unsplash.com/photo-1540544660406-6a69dacb2804?auto=format&fit=crop&q=80&w=800", 
+  museum: museumLocal,
+  eternal: "https://images.unsplash.com/photo-1540544660406-6a69dacb2804?auto=format&fit=crop&q=80&w=800",
   handbook: handbookImage,
   company_intro: introImage,
   fish_intro: storyImage,
@@ -1453,7 +1455,11 @@ const App = () => {
               <ul className="space-y-2 text-sm">
                 <li onClick={() => setActivePage('home')} className="hover:text-teal-400 cursor-pointer">{t.nav.home}</li>
                 <li onClick={() => setActivePage('products')} className="hover:text-teal-400 cursor-pointer">{t.nav.products}</li>
+                <li onClick={() => setActivePage('brand')} className="hover:text-teal-400 cursor-pointer">{t.nav.brand}</li>
                 <li onClick={() => setActivePage('tech')} className="hover:text-teal-400 cursor-pointer">{t.nav.tech}</li>
+                <li onClick={() => setActivePage('nutrition')} className="hover:text-teal-400 cursor-pointer">{t.nav.nutrition}</li>
+                <li onClick={() => setActivePage('tourism')} className="hover:text-teal-400 cursor-pointer">{t.nav.tourism}</li>
+                <li onClick={() => setActivePage('contact')} className="hover:text-teal-400 cursor-pointer">{t.nav.contact}</li>
               </ul>
             </div>
 
