@@ -247,7 +247,7 @@ const CONTENT = {
       title: '开启合作新篇章',
       subtitle: '诚邀餐饮、渠道、礼品采购商',
       address: '地址：广东省佛山市南海区西樵镇朝山工业二区5号',
-      phone: '电话：0757-86820382',
+      phone: '电话：13923710623',
       form: {
         name: '姓名',
         contact: '联系方式',
@@ -259,10 +259,10 @@ const CONTENT = {
       wechat: '微信公众号'
     },
     footer: {
-      desc: '佛山市智鼎农业科技发展有限公司。\n专注于热带亚热带名优水产全产业链发展。\n让世界尝到中国养殖的“忘不了”。',
+      desc: '深圳华海农业科技有限公司；\n深圳麻省计算机系统有限公司。\n专注于热带亚热带名优水产全产业链发展。\n让世界尝到中国养殖的“忘不了”。',
       links_title: '快速导航',
       contact_title: '联系方式',
-      copyright: '© 2023 佛山市智鼎农业科技发展有限公司. 保留所有权利.'
+      copyright: '© 2025 深圳华海农业科技有限公司，深圳麻省计算机系统有限公司. 保留所有权利.'
     }
   },
   en: {
@@ -466,7 +466,7 @@ const CONTENT = {
       title: 'Contact Us',
       subtitle: 'Business Cooperation',
       address: 'Add: No. 5, Chaoshan Ind. Zone, Xiqiao, Foshan, Guangdong',
-      phone: 'Tel: 0757-86820382',
+      phone: 'Tel: +86 13923710623',
       form: {
         name: 'Name',
         contact: 'Contact',
@@ -478,10 +478,10 @@ const CONTENT = {
       wechat: 'WeChat Official Account'
     },
     footer: {
-      desc: 'Foshan Zhiding Agricultural Technology Development Co., Ltd.\nFocusing on the whole industry chain of tropical high-quality aquatic products.\nLet the world taste the "Unforgettable" form China.',
+      desc: 'Shenzhen Huahai Agriculture Technology Co., Ltd.; \nShenzhen Mazen Computer Systems Co., Ltd.\nFocusing on the whole industry chain of tropical high-quality aquatic products.\nLet the world taste the "Unforgettable" from China.',
       links_title: 'Quick Links',
       contact_title: 'Contact',
-      copyright: '© 2023 Foshan Zhiding Agricultural Technology Development Co., Ltd. All rights reserved.'
+      copyright: '© 2025 Shenzhen Huahai Agriculture Technology Co., Ltd., Shenzhen Mazen Computer Systems Co., Ltd. All rights reserved.'
     }
   }
 };
@@ -505,16 +505,26 @@ const QuoteIcon = ({ className }) => (
 
 // --- 主页面组件 ---
 
-const HomePage = ({ t }) => {
+const HomePage = ({ t, lang }) => {
   if (!t || !t.hero || !t.usp) return null; // Defensive check
   const [activeMedia, setActiveMedia] = useState(null);
-  const galleryItems = [
+  const galleryMeta = lang === 'zh' 
+    ? { title: '走近“忘不了鱼”', subtitle: '快速浏览品牌手册、基地介绍与品控亮点，一目了然的图文画廊。' }
+    : { title: 'Discover Unforgettable', subtitle: 'Browse the handbook, company intro, and quality highlights in one glance.' };
+  const galleryItems = lang === 'zh' ? [
     { src: IMAGES.handbook, title: '苏丹鱼手册', desc: '全产业链档案，标准化养殖流程' },
     { src: IMAGES.company_intro, title: '公司简介', desc: '企业蓝图与发展路径' },
     { src: IMAGES.fish_intro, title: '苏丹鱼介绍', desc: '国宝级淡水鱼，风味与营养共存' },
     { src: IMAGES.fish_traits, title: '苏丹鱼特性', desc: '果香、可食鳞、胶质丰富' },
     { src: IMAGES.convenience, title: '更便捷', desc: '预制与冷链方案，触达更多餐桌' },
     { src: IMAGES.quality, title: '严格品控', desc: '层层把关，数字化溯源可查' },
+  ] : [
+    { src: IMAGES.handbook, title: 'Sultan Fish Handbook', desc: 'Full value-chain dossier and standardized farming process.' },
+    { src: IMAGES.company_intro, title: 'Company Profile', desc: 'Enterprise blueprint and growth path.' },
+    { src: IMAGES.fish_intro, title: 'About Sultan Fish', desc: 'National-treasure freshwater fish with standout flavor and nutrition.' },
+    { src: IMAGES.fish_traits, title: 'Fish Traits', desc: 'Fruity aroma, edible scales, collagen-rich.' },
+    { src: IMAGES.convenience, title: 'Convenience', desc: 'Ready-to-cook and cold-chain solutions for more tables.' },
+    { src: IMAGES.quality, title: 'Quality Control', desc: 'Multi-layer QC with full traceability.' },
   ];
 
   return (
@@ -626,8 +636,8 @@ const HomePage = ({ t }) => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-14">
           <p className="text-sm uppercase tracking-[0.3em] text-teal-200 mb-3">Gallery</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">走近“忘不了鱼”</h2>
-          <p className="text-slate-300 max-w-2xl mx-auto">快速浏览品牌手册、基地介绍与品控亮点，一目了然的图文画廊。</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{galleryMeta.title}</h2>
+          <p className="text-slate-300 max-w-2xl mx-auto">{galleryMeta.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
@@ -899,7 +909,7 @@ const ProductsPage = ({ t }) => {
   </div>
 )};
 
-const TechPage = ({ t }) => {
+const TechPage = ({ t, lang }) => {
   const [data, setData] = useState({ temp: 25.0, ph: 7.5, do: 7.2 });
 
   useEffect(() => {
@@ -1057,7 +1067,7 @@ const TechPage = ({ t }) => {
                  <h3 className="text-3xl font-bold text-slate-900">{item.title}</h3>
                  <p className="text-lg text-slate-500 leading-relaxed">{item.desc}</p>
                  <button className="text-teal-600 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-                    了解更多 <ArrowRight size={18} />
+                    {lang === 'zh' ? '了解更多' : 'Learn more'} <ArrowRight size={18} />
                  </button>
               </div>
             </div>
@@ -1068,12 +1078,12 @@ const TechPage = ({ t }) => {
         <div className="mt-20 pt-10 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-500 text-sm">
            <div className="flex items-center gap-2">
              <Database size={16} /> 
-             <span>数据支持：智鼎农业云平台</span>
+             <span>{lang === 'zh' ? '数据支持：智鼎农业云平台' : 'Data powered by Zhiding Agri Cloud'}</span>
            </div>
            <div className="flex items-center gap-4">
-             <span>联合研发：</span>
-             <span className="text-slate-800 font-bold">华南师范大学</span>
-             <span className="text-slate-800 font-bold">仲恺农业工程学院</span>
+             <span>{lang === 'zh' ? '联合研发：' : 'Co-developed with:'}</span>
+             <span className="text-slate-800 font-bold">{lang === 'zh' ? '华南师范大学' : 'South China Normal University'}</span>
+             <span className="text-slate-800 font-bold">{lang === 'zh' ? '仲恺农业工程学院' : 'Zhongkai Univ. of Agri. & Eng.'}</span>
            </div>
         </div>
       </div>
@@ -1091,7 +1101,7 @@ const TechPage = ({ t }) => {
   );
 };
 
-const NutritionPage = ({ t }) => {
+const NutritionPage = ({ t, lang }) => {
   if (!t || !t.nutrition) return null;
   return (
   <div className="pt-24 pb-20 bg-slate-50 animate-fade-in">
@@ -1197,8 +1207,8 @@ const NutritionPage = ({ t }) => {
             <h3 className="text-3xl font-bold text-slate-900">{t.nutrition.collagen_title}</h3>
             <p className="text-lg text-slate-500 leading-relaxed">{t.nutrition.collagen_desc}</p>
             <ul className="space-y-3">
-               <li className="flex items-center gap-3 text-slate-700"><CheckCircle size={18} className="text-pink-500"/> <span>美容养颜，保持肌肤弹性</span></li>
-               <li className="flex items-center gap-3 text-slate-700"><CheckCircle size={18} className="text-pink-500"/> <span>口感软糯，独家“烫鳞”技法</span></li>
+               <li className="flex items-center gap-3 text-slate-700"><CheckCircle size={18} className="text-pink-500"/> <span>{lang === 'zh' ? '美容养颜，保持肌肤弹性' : 'Beauty boost with collagen, keeps skin elastic'}</span></li>
+               <li className="flex items-center gap-3 text-slate-700"><CheckCircle size={18} className="text-pink-500"/> <span>{lang === 'zh' ? '口感软糯，独家“烫鳞”技法' : 'Soft edible scales with our signature blanching method'}</span></li>
             </ul>
          </div>
       </div>
@@ -1222,7 +1232,7 @@ const NutritionPage = ({ t }) => {
   </div>
 )};
 
-const TourismPage = ({ t }) => {
+const TourismPage = ({ t, lang }) => {
   if (!t || !t.tourism) return null;
   return (
   <div className="pt-24 pb-20 bg-white animate-fade-in">
@@ -1259,10 +1269,12 @@ const TourismPage = ({ t }) => {
       <div className="bg-teal-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
          <div className="relative z-10">
-            <h3 className="text-3xl font-bold mb-6">想要亲身体验？</h3>
-            <p className="mb-8 max-w-xl mx-auto opacity-90">欢迎预约参观考察，品尝正宗苏丹鱼全鱼宴，感受西樵山下的渔乐生活。</p>
+            <h3 className="text-3xl font-bold mb-6">{lang === 'zh' ? '想要亲身体验？' : 'Want to experience it?'}</h3>
+            <p className="mb-8 max-w-xl mx-auto opacity-90">
+              {lang === 'zh' ? '欢迎预约参观考察，品尝正宗苏丹鱼全鱼宴，感受西樵山下的渔乐生活。' : 'Book a visit to taste a full Sultan Fish feast and enjoy the Xiqiao riverside experience.'}
+            </p>
             <button className="px-8 py-3 bg-white text-teal-700 font-bold rounded-full hover:bg-teal-50 transition-colors shadow-lg">
-               预约参观
+               {lang === 'zh' ? '预约参观' : 'Book a Visit'}
             </button>
          </div>
       </div>
@@ -1421,12 +1433,12 @@ const App = () => {
 
       {/* 主体内容 */}
       <main className="flex-grow">
-        {activePage === 'home' && <HomePage t={t} setPage={setActivePage} />}
+        {activePage === 'home' && <HomePage t={t} lang={lang} setPage={setActivePage} />}
         {activePage === 'brand' && <BrandPage t={t} />}
         {activePage === 'products' && <ProductsPage t={t} />}
-        {activePage === 'tech' && <TechPage t={t} />}
-        {activePage === 'nutrition' && <NutritionPage t={t} />}
-        {activePage === 'tourism' && <TourismPage t={t} />}
+        {activePage === 'tech' && <TechPage t={t} lang={lang} />}
+        {activePage === 'nutrition' && <NutritionPage t={t} lang={lang} />}
+        {activePage === 'tourism' && <TourismPage t={t} lang={lang} />}
         {activePage === 'contact' && <ContactPage t={t} />}
       </main>
 
@@ -1466,9 +1478,9 @@ const App = () => {
             <div>
               <h5 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">{t.footer.contact_title}</h5>
               <ul className="space-y-2 text-sm">
-                <li>0757-86820382</li>
+                <li>{lang === 'zh' ? '电话：13923710623' : 'Tel: +86 13923710623'}</li>
                 <li>{lang === 'zh' ? '广东省佛山市南海区' : 'Nanhai District, Foshan, Guangdong'}</li>
-                <li>business@zhiding.com</li>
+                <li>zengweifeng13@163.com</li>
               </ul>
             </div>
           </div>
