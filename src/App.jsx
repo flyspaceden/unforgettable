@@ -1353,6 +1353,7 @@ const App = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = CONTENT[lang] || CONTENT['zh']; // Fallback to zh
+  const navDark = activePage === 'contact';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -1375,11 +1376,17 @@ const App = () => {
   return (
     <div className="font-sans text-slate-800 antialiased min-h-screen flex flex-col selection:bg-teal-200 selection:text-teal-900 bg-white">
       {/* 导航栏 */}
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-white/50 backdrop-blur-sm py-5'}`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        navDark 
+          ? 'bg-slate-900/90 backdrop-blur-md shadow-lg py-4 text-white' 
+          : isScrolled 
+            ? 'bg-white/95 backdrop-blur-md shadow-sm py-3 text-slate-900' 
+            : 'bg-white/50 backdrop-blur-sm py-5 text-slate-900'
+      }`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => setActivePage('home')}>
             <img src={logoImage} alt="Brand Logo" className="w-12 h-12 rounded-lg shadow-md object-cover" />
-            <span className="font-bold text-xl tracking-tight text-slate-900">
+            <span className={`font-bold text-xl tracking-tight ${navDark ? 'text-white' : 'text-slate-900'}`}>
               {lang === 'zh' ? '忘不了鱼' : 'Unforgettable'}
             </span>
           </div>
@@ -1389,7 +1396,11 @@ const App = () => {
               <button 
                 key={key} 
                 onClick={() => setActivePage(key)}
-                className={`text-sm font-medium hover:text-teal-600 transition-colors uppercase tracking-wide ${activePage === key ? 'text-teal-600 font-bold' : 'text-slate-500'}`}
+                className={`text-sm font-medium hover:text-teal-400 transition-colors uppercase tracking-wide ${
+                  activePage === key 
+                    ? (navDark ? 'text-teal-200 font-bold' : 'text-teal-600 font-bold') 
+                    : (navDark ? 'text-slate-200' : 'text-slate-500')
+                }`}
               >
                 {t.nav[key]}
               </button>
@@ -1397,33 +1408,52 @@ const App = () => {
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
-            <button onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} className="w-9 h-9 rounded-full border border-slate-200 flex items-center justify-center text-xs font-bold text-slate-500 hover:bg-slate-50">
+            <button 
+              onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} 
+              className={`w-9 h-9 rounded-full border flex items-center justify-center text-xs font-bold transition-colors ${
+                navDark 
+                  ? 'border-white/20 text-white hover:bg-white/10' 
+                  : 'border-slate-200 text-slate-500 hover:bg-slate-50'
+              }`}
+            >
               {lang === 'zh' ? 'EN' : '中'}
             </button>
-            <button onClick={() => setActivePage('contact')} className="px-5 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-full hover:bg-teal-600 transition-colors shadow-lg">
+            <button 
+              onClick={() => setActivePage('contact')} 
+              className={`px-5 py-2.5 text-sm font-bold rounded-full transition-colors shadow-lg ${
+                navDark ? 'bg-white text-slate-900 hover:bg-teal-100' : 'bg-slate-900 text-white hover:bg-teal-600'
+              }`}
+            >
               {t.nav.btn}
             </button>
           </div>
 
-          <button className="lg:hidden text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <button className={`lg:hidden ${navDark ? 'text-white' : 'text-slate-900'}`} onClick={() => setIsMenuOpen(!isMenuOpen)}>
             {isMenuOpen ? <X size={28}/> : <Menu size={28}/>}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-t border-slate-100 shadow-2xl p-6 flex flex-col gap-4 lg:hidden animate-fade-in-up">
+          <div className={`absolute top-full left-0 w-full border-t shadow-2xl p-6 flex flex-col gap-4 lg:hidden animate-fade-in-up ${
+            navDark ? 'bg-slate-900 text-white border-slate-800' : 'bg-white text-slate-900 border-slate-100'
+          }`}>
             {['home', 'products', 'brand', 'tech', 'nutrition', 'tourism', 'contact'].map((key) => (
               <button 
                 key={key} 
                 onClick={() => setActivePage(key)}
-                className="text-left text-lg font-medium text-slate-700 py-2 border-b border-slate-50"
+                className={`text-left text-lg font-medium py-2 border-b ${
+                  navDark ? 'text-white border-white/10' : 'text-slate-700 border-slate-50'
+                }`}
               >
                 {t.nav[key]}
               </button>
             ))}
             <div className="flex justify-between items-center pt-4">
-               <button onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} className="text-sm font-bold text-slate-500 flex items-center gap-2">
+               <button 
+                 onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')} 
+                 className={`text-sm font-bold flex items-center gap-2 ${navDark ? 'text-slate-200' : 'text-slate-500'}`}
+               >
                  <Globe size={16}/> {lang === 'zh' ? 'Switch to English' : '切换中文'}
                </button>
             </div>
