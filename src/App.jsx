@@ -1303,7 +1303,7 @@ const ContactPage = ({ t }) => {
             </div>
             <div className="flex items-center gap-4">
               <Mail className="text-teal-500 flex-shrink-0" />
-              <p>business@zhiding-agri.com</p>
+              <p>zengweifeng13@163.com</p>
             </div>
           </div>
 
